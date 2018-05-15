@@ -4,10 +4,12 @@
   Sep. 10th 2016
 */
 
-#include <WINDOWS.H>    
+// #include <WINDOWS.H>
 #include <stdio.h>
 #include <math.h>
-#include <malloc.h>
+//#include <cmath>
+#include <stdlib.h>
+#include <sys/malloc.h> //mac 无法直接include malloc
 
 
 void cec17_test_func(double *, double *,int,int,int);
@@ -16,7 +18,7 @@ double *OShift,*M,*y,*z,*x_bound;
 int ini_flag=0,n_flag,func_flag,*SS;
 
 
-void main()
+int main()
 {
 	int i,j,k,n,m,func_num;
 	double *f,*x;
@@ -41,7 +43,7 @@ void main()
 
 		for(k=0;k<n;k++)
 		{
-				fscanf(fpt,"%Lf",&x[k]);
+				fscanf(fpt,"%lf",&x[k]);
 				/*printf("%Lf\n",x[k]);*/
 		}
 
@@ -59,7 +61,7 @@ void main()
 			cec17_test_func(x, f, n,m,func_num);
 			for (j = 0; j < 2; j++)
 			{
-				printf(" f%d(x[%d]) = %Lf,",func_num,j+1,f[j]);
+				printf(" f%d(x[%d]) = %lf,",func_num,j+1,f[j]);
 			}
 			printf("\n");
 		}

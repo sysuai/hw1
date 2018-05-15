@@ -5,10 +5,11 @@
 */
 
 
-#include <WINDOWS.H>      
+// #include <WINDOWS.H>
 #include <stdio.h>
-#include <math.h>
-#include <malloc.h>
+#include <cmath>
+#include <stdlib.h>
+#include <sys/malloc.h> //mac 无法直接include malloc
 
 #define INF 1.0e99
 #define EPS 1.0e-14
@@ -123,7 +124,7 @@ void cec17_test_func(double *x, double *f, int nx, int mx,int func_num)
 				printf("\nError: there is insufficient memory available!\n");
 			for (i=0; i<nx*nx; i++)
 			{
-				fscanf(fpt,"%Lf",&M[i]);
+				fscanf(fpt,"%lf",&M[i]);
 			}
 		}
 		else
@@ -133,7 +134,7 @@ void cec17_test_func(double *x, double *f, int nx, int mx,int func_num)
 				printf("\nError: there is insufficient memory available!\n");
 			for (i=0; i<cf_num*nx*nx; i++)
 			{
-				fscanf(fpt,"%Lf",&M[i]);
+				fscanf(fpt,"%lf",&M[i]);
 			}
 		}
 		fclose(fpt);
@@ -153,7 +154,7 @@ void cec17_test_func(double *x, double *f, int nx, int mx,int func_num)
 			printf("\nError: there is insufficient memory available!\n");
 			for(i=0;i<nx;i++)
 			{
-				fscanf(fpt,"%Lf",&OShift[i]);
+				fscanf(fpt,"%lf",&OShift[i]);
 			}
 		}
 		else
@@ -165,13 +166,13 @@ void cec17_test_func(double *x, double *f, int nx, int mx,int func_num)
 			{
 				for (j=0;j<nx;j++)
 				{
-					fscanf(fpt,"%Lf",&OShift[i*nx+j]);
+					fscanf(fpt,"%lf",&OShift[i*nx+j]);
 				}
 				fscanf(fpt,"%*[^\n]%*c"); 
 			}
 			for (j=0;j<nx;j++)
 			{
-				fscanf(fpt,"%Lf",&OShift[(cf_num-1)*nx+j]);
+				fscanf(fpt,"%lf",&OShift[(cf_num-1)*nx+j]);
 			}
 				
 		}
@@ -392,7 +393,7 @@ void sum_diff_pow_func (double *x, double *f, int nx, double *Os,double *Mr, int
 	for (i=0; i<nx; i++)
 	{
 		double xi = z[i];
-		double newv = pow((abs(xi)),(i+1));
+        double newv = pow((fabs(xi)),(i+1));
 		sum = sum + newv;
 	}
 	
